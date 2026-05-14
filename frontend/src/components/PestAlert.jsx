@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { AlertTriangle, RefreshCcw, MapPin, ShieldCheck, Users, Bell } from 'lucide-react';
 import { motion } from 'framer-motion';
 import axios from 'axios';
+import API_URL from '../config';
 
 const SEVERITY_CONFIG = {
   Critical: { color: '#ef4444', bg: 'rgba(239,68,68,0.1)',  border: 'rgba(239,68,68,0.25)',  label: 'CRITICAL', pulse: true },
@@ -21,7 +22,7 @@ const PestAlert = () => {
   const fetchAlerts = async (r) => {
     setLoading(true);
     try {
-      const url = r === 'All' ? 'http://localhost:5000/api/pests' : `http://localhost:5000/api/pests?region=${r}`;
+      const url = r === 'All' ? `${API_URL}/api/pests` : `${API_URL}/api/pests?region=${r}`;
       const res = await axios.get(url);
       setAlerts(res.data);
     } catch {

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Droplets, Thermometer, Wind, AlertTriangle, CheckCircle2, RefreshCcw, Gauge, CloudRain, Sun } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import axios from 'axios';
+import API_URL from '../config';
 
 const CROP_ET = { Wheat: 1.15, Rice: 1.20, Cotton: 1.05, Mustard: 0.95, Maize: 1.10 };
 
@@ -23,7 +24,7 @@ const IrrigationAdvisor = () => {
   const analyze = async () => {
     setLoading(true);
     try {
-      const res = await axios.post('http://localhost:5000/api/irrigation', {
+      const res = await axios.post(`${API_URL}/api/irrigation`, {
         crop, soil_moisture: moisture, temp, humidity
       });
       setResult(res.data);

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { TrendingUp, TrendingDown, RefreshCcw, ArrowUpRight, ArrowDownRight, BarChart2, Search } from 'lucide-react';
 import { motion } from 'framer-motion';
 import axios from 'axios';
+import API_URL from '../config';
 
 const EXTENDED_TABLE = [
   { crop: 'Wheat',   market: 'Kalyanpur',     arrival: '120', min: '2,050', max: '2,150', status: 'Rising',  pct: '+2.5' },
@@ -27,7 +28,7 @@ const MandiPrices = () => {
   const fetchPrices = async () => {
     setLoading(true);
     try {
-      const res = await axios.get('http://localhost:5000/api/mandi');
+      const res = await axios.get(`${API_URL}/api/mandi`);
       setPrices(res.data);
     } catch {
       setPrices([

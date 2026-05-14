@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Droplets, Info, FlaskConical, ShieldCheck, AlertTriangle, CheckCircle2, Clock, X, ShoppingCart, IndianRupee } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import axios from 'axios';
+import API_URL from '../config';
 
 const CROP_DATA = {
   Wheat:   { emoji: '🌾', color: '#f59e0b', schedule: 'Oct–Nov · Jan · Mar', npk: '120:60:40', ph: '6.0–7.5' },
@@ -44,7 +45,7 @@ const FertilizerGuide = () => {
     setSelectedCrop(crop);
     setFertilizers(null);
     try {
-      const res = await axios.get(`http://localhost:5000/api/fertilizers?crop=${crop}`);
+      const res = await axios.get(`${API_URL}/api/fertilizers?crop=${crop}`);
       setTimeout(() => { setFertilizers(res.data.fertilizers); setLoading(false); }, 600);
     } catch {
       setTimeout(() => { setFertilizers(['General NPK', 'Organic Manure']); setLoading(false); }, 600);

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { CloudSun, Wind, Droplets, Thermometer, MapPin, RefreshCcw, Eye, Gauge, Umbrella } from 'lucide-react';
 import { motion } from 'framer-motion';
 import axios from 'axios';
+import API_URL from '../config';
 
 const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 const icons = ['☀️', '⛅', '🌧️', '☀️', '🌤️', '🌩️', '☀️'];
@@ -24,7 +25,7 @@ const Weather = ({ userLocation }) => {
     setLoading(true);
     try {
       const city = userLocation ? userLocation.split(',')[0] : 'New Delhi';
-      const res = await axios.get(`http://localhost:5000/api/weather?city=${encodeURIComponent(city)}`);
+      const res = await axios.get(`${API_URL}/api/weather?city=${encodeURIComponent(city)}`);
       setWeather(res.data);
     } catch {
       setWeather({ city: userLocation || 'New Delhi, India', temp: 32, condition: 'Sunny', humidity: 40, wind_speed: 12 });

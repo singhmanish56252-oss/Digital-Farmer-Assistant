@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Truck, Star, MapPin, Phone, RefreshCcw, CheckCircle2 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import axios from 'axios';
+import API_URL from '../config';
 
 const TYPES = ['All', 'Tractor', 'Harvester', 'Thresher', 'Irrigation', 'Sprayer'];
 
@@ -16,7 +17,7 @@ const EquipmentRental = () => {
   const fetchEquipment = async (t) => {
     setLoading(true);
     try {
-      const res = await axios.get(`http://localhost:5000/api/equipment?type=${t}`);
+      const res = await axios.get(`${API_URL}/api/equipment?type=${t}`);
       setEquipment(res.data);
     } catch {
       setEquipment([

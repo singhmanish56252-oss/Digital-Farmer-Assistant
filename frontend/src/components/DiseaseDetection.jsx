@@ -5,6 +5,7 @@ import {
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import axios from 'axios';
+import API_URL from '../config';
 
 const DISEASE_COLORS = {
   'Healthy':        { color: '#22c55e', bg: 'rgba(34,197,94,0.1)',   border: 'rgba(34,197,94,0.3)',  icon: '✅', severity: 'None' },
@@ -67,7 +68,7 @@ const DiseaseDetection = () => {
     const formData = new FormData();
     formData.append('image', selectedImage);
     try {
-      const res = await axios.post('http://localhost:5000/api/detect', formData);
+      const res = await axios.post(`${API_URL}/api/detect`, formData);
       setResult(res.data);
     } catch {
       setResult({ disease: 'Leaf Rust', confidence: '94.28%', treatment: 'Apply fungicide with Tebuconazole and avoid overhead irrigation. Remove and destroy infected plant residue.' });

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Sprout, Info, ChevronRight, Cpu, Droplets, Sun, Thermometer, Star } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import axios from 'axios';
+import API_URL from '../config';
 
 const CROP_DETAILS = {
   Wheat:   { emoji: '🌾', yieldHigh: '48 qtl/acre', period: '120-150 days', roi: '38%', rating: 4.8 },
@@ -20,7 +21,7 @@ const CropSuggestion = () => {
   const getSuggestions = async () => {
     setLoading(true);
     try {
-      const res = await axios.post('http://localhost:5000/api/crops', { season, soil });
+      const res = await axios.post(`${API_URL}/api/crops`, { season, soil });
       setSuggestions(res.data);
     } catch {
       setSuggestions([

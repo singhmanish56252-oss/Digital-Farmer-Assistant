@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Activity, CheckCircle2, RefreshCcw, Leaf } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import axios from 'axios';
+import API_URL from '../config';
 
 const SOIL_TYPES = ['Alluvial', 'Black', 'Loamy', 'Clayey', 'Sandy', 'Red'];
 
@@ -17,7 +18,7 @@ const SoilAnalyzer = () => {
   const analyze = async () => {
     setLoading(true);
     try {
-      const res = await axios.post('http://localhost:5000/api/soil', {
+      const res = await axios.post(`${API_URL}/api/soil`, {
         soil_type: soilType, nitrogen: n, phosphorus: p, potassium: k, ph
       });
       setResult(res.data);

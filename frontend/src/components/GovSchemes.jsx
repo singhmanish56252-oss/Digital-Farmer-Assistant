@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Building2, RefreshCcw, ExternalLink, CheckCircle2, Search } from 'lucide-react';
 import { motion } from 'framer-motion';
 import axios from 'axios';
+import API_URL from '../config';
 
 const CATEGORIES = ['All', 'Income Support', 'Insurance', 'Credit', 'Irrigation', 'Market Access', 'Equipment'];
 
@@ -23,7 +24,7 @@ const GovSchemes = () => {
   const fetchSchemes = async (cat) => {
     setLoading(true);
     try {
-      const res = await axios.get(`http://localhost:5000/api/schemes?category=${cat}`);
+      const res = await axios.get(`${API_URL}/api/schemes?category=${cat}`);
       setSchemes(res.data);
     } catch {
       setSchemes([

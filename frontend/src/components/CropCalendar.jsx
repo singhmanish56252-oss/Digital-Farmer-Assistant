@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Calendar, CheckCircle2, Clock, Droplets, RefreshCcw, ChevronRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 import axios from 'axios';
+import API_URL from '../config';
 
 const TASK_CONFIG = {
   prep:      { color: '#8b5cf6', icon: '🌱', label: 'Preparation' },
@@ -28,7 +29,7 @@ const CropCalendar = () => {
   const fetchCalendar = async (c) => {
     setLoading(true);
     try {
-      const res = await axios.get(`http://localhost:5000/api/calendar?crop=${c}`);
+      const res = await axios.get(`${API_URL}/api/calendar?crop=${c}`);
       setTasks(res.data.tasks);
       setTotalDays(res.data.total_days);
     } catch {

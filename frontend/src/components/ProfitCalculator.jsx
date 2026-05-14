@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { DollarSign, TrendingUp, TrendingDown, RefreshCcw, Calculator } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import axios from 'axios';
+import API_URL from '../config';
 
 const CROPS = ['Wheat', 'Rice', 'Cotton', 'Mustard', 'Maize'];
 const CROP_DEFAULTS = {
@@ -39,7 +40,7 @@ const ProfitCalculator = () => {
   const calculate = async () => {
     setLoading(true);
     try {
-      const res = await axios.post('http://localhost:5000/api/profit', { crop, area, ...costs });
+      const res = await axios.post(`${API_URL}/api/profit`, { crop, area, ...costs });
       setResult(res.data);
     } catch {
       const totalCost = Object.values(costs).reduce((a, b) => a + b, 0);
