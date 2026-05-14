@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kisan Seva - AI Farm Platform</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Syne:wght@700;800;900&display=swap" rel="stylesheet">
+  
+  <!-- Boxicons for standard icons -->
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <nav class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="logo-box">🌾</div>
+      <div class="logo-text">
+        <h1>Kisan Seva</h1>
+        <p>AI Farm Platform</p>
+      </div>
+    </div>
+    <div class="divider"></div>
+    <div class="status-badge">
+      <span class="pulse-dot"></span>
+      <p>ALL SYSTEMS LIVE</p>
+    </div>
+
+    <div class="nav-groups">
+      <!-- Group 1 -->
+      <div class="nav-group">
+        <p class="group-title">Overview</p>
+        <button class="nav-item active" data-target="dashboard">
+          <div class="icon-box"><i class='bx bxs-dashboard'></i></div>
+          <span>Dashboard</span>
+        </button>
+      </div>
+      <!-- Group 2 -->
+      <div class="nav-group">
+        <p class="group-title">Field Intelligence</p>
+        <button class="nav-item" data-target="weather">
+          <div class="icon-box"><i class='bx bx-cloud-light-rain'></i></div>
+          <span>Weather</span>
+        </button>
+        <button class="nav-item" data-target="mandi">
+          <div class="icon-box"><i class='bx bx-trending-up'></i></div>
+          <span>Mandi Live</span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <header class="topbar">
+      <div class="left-side">
+        <button id="menu-btn" class="mobile-only"><i class='bx bx-menu'></i></button>
+        <div class="page-title">
+          <p>🌱 Kisan Seva Platform</p>
+          <h2 id="current-page-title">Dashboard</h2>
+        </div>
+      </div>
+      <div class="right-side">
+        <div class="search-box hidden-mobile">
+          <i class='bx bx-search'></i>
+          <input type="text" placeholder="Search features...">
+        </div>
+        <button class="icon-btn notification-btn">
+          <i class='bx bxs-bell'></i>
+          <span class="badge-dot"></span>
+        </button>
+        <div class="user-profile">
+          <div class="avatar">F</div>
+          <div class="user-info">
+            <p>Farmer</p>
+            <span>★ Premium Member</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="content-wrapper" id="content-container">
+      
+      <!-- DASHBOARD SECTION -->
+      <section id="dashboard" class="page-section active">
+        <div class="greeting animate-fade-in">
+          <p class="section-label">☀️ Good Morning</p>
+          <h2>Namaste, <span class="gradient-text">Farmer</span></h2>
+          <p class="subtitle">Indore, MP · <span id="current-date"></span> · 🌾 Wheat Season Active</p>
+        </div>
+
+        <div class="stats-grid">
+          <div class="glass-card stat-card" onclick="app.navigate('weather')">
+            <div class="stat-header"><i class='bx bxs-thermometer'></i><i class='bx bx-right-top-arrow-circle'></i></div>
+            <p class="stat-label">Temperature</p>
+            <p class="stat-num text-sky" id="dash-temp">--°C</p>
+            <p class="stat-sub">Loading forecast...</p>
+          </div>
+          <div class="glass-card stat-card" onclick="app.navigate('mandi')">
+            <div class="stat-header"><i class='bx bx-rupee'></i><i class='bx bx-right-top-arrow-circle'></i></div>
+            <p class="stat-label">Wheat Price</p>
+            <p class="stat-num text-amber" id="dash-price">₹--</p>
+            <p class="stat-sub">Kalyanpur Mandi</p>
+          </div>
+        </div>
+
+        <div class="quick-actions">
+          <p class="section-label">All Features</p>
+          <div class="actions-grid">
+            <button class="glass-card action-btn" onclick="app.navigate('weather')">
+              <div class="icon-wrapper sky"><i class='bx bx-cloud-light-rain'></i></div>
+              <p>Weather Forecast</p>
+              <span>Live AI updates</span>
+            </button>
+            <button class="glass-card action-btn" onclick="app.navigate('mandi')">
+              <div class="icon-wrapper amber"><i class='bx bx-trending-up'></i></div>
+              <p>Mandi Prices</p>
+              <span>Real-time rates</span>
+            </button>
+            <button class="glass-card action-btn" onclick="alert('Feature coming soon in this JS rewrite!')">
+              <div class="icon-wrapper green"><i class='bx bx-scan'></i></div>
+              <p>Disease Scan</p>
+              <span>AI leaf detection</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- WEATHER SECTION -->
+      <section id="weather" class="page-section" style="display: none;">
+        <div class="flex-between">
+          <div>
+             <p class="section-label text-sky">Live API Integration</p>
+             <h2>Weather Intelligence</h2>
+          </div>
+        </div>
+        <div class="glass-card p-6 mt-6">
+          <div class="weather-box">
+             <i class='bx bx-cloud-light-rain text-sky' style="font-size: 3rem;"></i>
+             <div>
+                <h3 id="w-city">Loading...</h3>
+                <p id="w-cond" class="text-muted">--</p>
+             </div>
+             <h1 id="w-temp" class="text-sky" style="font-size: 4rem; margin-left: auto;">--°C</h1>
+          </div>
+          <div class="divider"></div>
+          <div class="stats-grid">
+            <div><p>Humidity</p><h3 id="w-hum">--%</h3></div>
+            <div><p>Wind Speed</p><h3 id="w-wind">-- km/h</h3></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- MANDI SECTION -->
+      <section id="mandi" class="page-section" style="display: none;">
+        <div class="flex-between">
+          <div>
+             <p class="section-label text-amber">Market API Integration</p>
+             <h2>Live Mandi Prices</h2>
+          </div>
+        </div>
+        <div class="glass-card p-6 mt-6">
+           <table class="data-table">
+             <thead>
+               <tr>
+                 <th>Crop</th>
+                 <th>Location</th>
+                 <th>Price (₹/Qtl)</th>
+                 <th>Trend</th>
+               </tr>
+             </thead>
+             <tbody id="mandi-table-body">
+               <tr><td colspan="4" style="text-align: center;">Loading prices...</td></tr>
+             </tbody>
+           </table>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

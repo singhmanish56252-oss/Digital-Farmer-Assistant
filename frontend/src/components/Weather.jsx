@@ -9,10 +9,10 @@ const temps = [32, 29, 26, 33, 31, 28, 34];
 
 const StatPill = ({ icon: Icon, label, value, color }) => (
   <div className="flex flex-col items-center gap-2 px-6 py-5 rounded-2xl"
-    style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.08)' }}>
+    style={{ background: 'var(--bg-card)', border: '1px solid var(--border-light)' }}>
     <Icon size={22} style={{ color }} />
-    <p style={{ fontSize: 20, fontWeight: 800, color: '#f1f5f9' }}>{value}</p>
-    <p style={{ fontSize: 11, color: '#64748b', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em' }}>{label}</p>
+    <p style={{ fontSize: 20, fontWeight: 800, color: 'var(--text-primary)' }}>{value}</p>
+    <p style={{ fontSize: 11, color: 'var(--text-muted)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em' }}>{label}</p>
   </div>
 );
 
@@ -36,8 +36,8 @@ const Weather = ({ userLocation }) => {
 
   if (loading) return (
     <div className="flex flex-col items-center justify-center py-32 gap-4">
-      <RefreshCcw size={36} className="animate-spin" style={{ color: '#22c55e' }} />
-      <p style={{ color: '#64748b', fontSize: 14 }}>Fetching live weather data...</p>
+      <RefreshCcw size={36} className="animate-spin" style={{ color: 'var(--primary)' }} />
+      <p style={{ color: 'var(--text-secondary)', fontSize: 14 }}>Fetching live weather data...</p>
     </div>
   );
 
@@ -47,8 +47,8 @@ const Weather = ({ userLocation }) => {
     <div className="space-y-6 animate-fade-in">
       <div className="flex items-center justify-between">
         <div>
-          <p style={{ fontSize: 11, color: '#4ade80', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 4 }}>Live Weather Intelligence</p>
-          <h2 style={{ fontSize: '1.75rem', fontWeight: 900, color: '#f1f5f9', letterSpacing: '-0.02em' }}>Weather Insights</h2>
+          <p style={{ fontSize: 11, color: 'var(--primary)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 4 }}>Live Weather Intelligence</p>
+          <h2 style={{ fontSize: '1.75rem', fontWeight: 900, color: 'var(--text-primary)', letterSpacing: '-0.02em' }}>Weather Insights</h2>
         </div>
         <button onClick={fetchWeather} className="btn-ghost">
           <RefreshCcw size={16} /> Refresh
@@ -57,7 +57,7 @@ const Weather = ({ userLocation }) => {
 
       {/* Hero Weather Card */}
       <motion.div initial={{ opacity: 0, scale: 0.97 }} animate={{ opacity: 1, scale: 1 }} className="glass-card p-8 overflow-hidden relative"
-        style={{ background: 'linear-gradient(135deg, rgba(59,130,246,0.2) 0%, rgba(99,102,241,0.1) 50%, rgba(8,12,18,0) 100%)', border: '1px solid rgba(59,130,246,0.25)' }}>
+        style={{ background: 'linear-gradient(135deg, rgba(59,130,246,0.1) 0%, rgba(99,102,241,0.05) 50%, transparent 100%)', border: '1px solid rgba(59,130,246,0.2)' }}>
         
         {/* BG Blur Orb */}
         <div style={{ position: 'absolute', top: -40, right: -40, width: 200, height: 200, borderRadius: '50%', background: 'radial-gradient(circle, rgba(59,130,246,0.2), transparent)', filter: 'blur(40px)', pointerEvents: 'none' }} />
@@ -66,15 +66,15 @@ const Weather = ({ userLocation }) => {
           <div>
             <div className="flex items-center gap-2 mb-3">
               <MapPin size={16} style={{ color: '#60a5fa' }} />
-              <span style={{ fontSize: 14, color: '#94a3b8', fontWeight: 600 }}>{weather.city}</span>
+              <span style={{ fontSize: 14, color: 'var(--text-secondary)', fontWeight: 600 }}>{weather.city}</span>
             </div>
             <div className="flex items-end gap-3 mb-2">
-              <span style={{ fontSize: '5rem', fontWeight: 900, color: '#f1f5f9', lineHeight: 1, letterSpacing: '-0.04em' }}>{weather.temp}°</span>
-              <span style={{ fontSize: 20, color: '#64748b', marginBottom: 12, fontWeight: 600 }}>C</span>
+              <span style={{ fontSize: '5rem', fontWeight: 900, color: 'var(--text-primary)', lineHeight: 1, letterSpacing: '-0.04em' }}>{weather.temp}°</span>
+              <span style={{ fontSize: 20, color: 'var(--text-muted)', marginBottom: 12, fontWeight: 600 }}>C</span>
             </div>
             <div className="flex items-center gap-3">
               <span style={{ fontSize: 28 }}>{weather.condition === 'Sunny' ? '☀️' : weather.condition === 'Rainy' ? '🌧️' : '⛅'}</span>
-              <span style={{ fontSize: 18, color: '#e2e8f0', fontWeight: 700 }}>{weather.condition}</span>
+              <span style={{ fontSize: 18, color: 'var(--text-primary)', fontWeight: 700 }}>{weather.condition}</span>
             </div>
           </div>
 
@@ -88,14 +88,14 @@ const Weather = ({ userLocation }) => {
 
       {/* 7-Day Forecast */}
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15 }} className="glass-card p-6">
-        <h3 style={{ fontSize: 14, fontWeight: 700, color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 20 }}>7-Day Forecast</h3>
+        <h3 style={{ fontSize: 14, fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 20 }}>7-Day Forecast</h3>
         <div className="flex justify-between gap-2">
           {days.map((d, i) => (
             <div key={d} className="flex-1 flex flex-col items-center gap-2 py-4 rounded-2xl transition-all cursor-pointer"
-              style={i === 0 ? { background: 'rgba(34,197,94,0.12)', border: '1px solid rgba(34,197,94,0.25)' } : { background: 'rgba(255,255,255,0.03)', border: '1px solid transparent' }}>
-              <p style={{ fontSize: 11, fontWeight: 700, color: i === 0 ? '#4ade80' : '#64748b', textTransform: 'uppercase' }}>{d}</p>
+              style={i === 0 ? { background: 'var(--primary-light)', border: '1px solid var(--primary)' } : { background: 'var(--bg-card)', border: '1px solid transparent' }}>
+              <p style={{ fontSize: 11, fontWeight: 700, color: i === 0 ? 'var(--primary)' : 'var(--text-muted)', textTransform: 'uppercase' }}>{d}</p>
               <span style={{ fontSize: 22 }}>{icons[i]}</span>
-              <p style={{ fontSize: 15, fontWeight: 800, color: '#f1f5f9' }}>{temps[i]}°</p>
+              <p style={{ fontSize: 15, fontWeight: 800, color: 'var(--text-primary)' }}>{temps[i]}°</p>
               <div className="progress-bar w-3/4" style={{ height: 3 }}>
                 <div className="progress-fill" style={{ width: `${(temps[i] - 24) * 10}%` }} />
               </div>
@@ -108,10 +108,10 @@ const Weather = ({ userLocation }) => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.25 }} className="glass-card p-6">
           <div className="flex items-center gap-3 mb-5">
-            <div className="p-2 rounded-xl" style={{ background: 'rgba(34,197,94,0.12)', border: '1px solid rgba(34,197,94,0.2)' }}>
-              <Umbrella size={16} style={{ color: '#4ade80' }} />
+            <div className="p-2 rounded-xl" style={{ background: 'var(--primary-light)', border: '1px solid var(--primary)' }}>
+              <Umbrella size={16} style={{ color: 'var(--primary)' }} />
             </div>
-            <h4 style={{ fontSize: 14, fontWeight: 700, color: '#e2e8f0' }}>Agricultural Impact</h4>
+            <h4 style={{ fontSize: 14, fontWeight: 700, color: 'var(--text-primary)' }}>Agricultural Impact</h4>
           </div>
           <div className="space-y-3">
             {[
@@ -119,9 +119,9 @@ const Weather = ({ userLocation }) => {
               { dot: '#f59e0b', text: 'High evaporation rate — plan evening irrigation to minimize loss.' },
               { dot: '#3b82f6', text: 'UV index high; apply pesticide before 8AM or after 5PM.' },
             ].map((item, i) => (
-              <div key={i} className="flex gap-3 p-3 rounded-xl" style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.05)' }}>
+              <div key={i} className="flex gap-3 p-3 rounded-xl" style={{ background: 'var(--bg-card)', border: '1px solid var(--border-light)' }}>
                 <div className="w-2 h-2 rounded-full mt-1.5 flex-shrink-0" style={{ background: item.dot, boxShadow: `0 0 6px ${item.dot}` }} />
-                <p style={{ fontSize: 13, color: '#94a3b8', lineHeight: 1.6 }}>{item.text}</p>
+                <p style={{ fontSize: 13, color: 'var(--text-secondary)', lineHeight: 1.6 }}>{item.text}</p>
               </div>
             ))}
           </div>
@@ -132,7 +132,7 @@ const Weather = ({ userLocation }) => {
             <div className="p-2 rounded-xl" style={{ background: 'rgba(99,102,241,0.12)', border: '1px solid rgba(99,102,241,0.2)' }}>
               <Gauge size={16} style={{ color: '#a78bfa' }} />
             </div>
-            <h4 style={{ fontSize: 14, fontWeight: 700, color: '#e2e8f0' }}>Live Metrics</h4>
+            <h4 style={{ fontSize: 14, fontWeight: 700, color: 'var(--text-primary)' }}>Live Metrics</h4>
           </div>
           <div className="space-y-4">
             {[
@@ -143,7 +143,7 @@ const Weather = ({ userLocation }) => {
             ].map((m, i) => (
               <div key={i}>
                 <div className="flex justify-between mb-1.5">
-                  <span style={{ fontSize: 12, fontWeight: 600, color: '#94a3b8' }}>{m.label}</span>
+                  <span style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-muted)' }}>{m.label}</span>
                   <span style={{ fontSize: 12, fontWeight: 800, color: m.color }}>{m.unit}</span>
                 </div>
                 <div className="progress-bar">

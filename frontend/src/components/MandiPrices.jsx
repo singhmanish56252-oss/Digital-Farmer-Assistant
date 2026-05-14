@@ -190,6 +190,56 @@ const MandiPrices = () => {
         </div>
       </motion.div>
 
+      {/* AI Price Prediction */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+        <div className="glass-card p-6 border-indigo-500/30 bg-indigo-900/10">
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="text-sm font-bold text-indigo-400 uppercase tracking-wider flex items-center gap-2">
+              <TrendingUp size={16} /> 7-Day AI Price Forecast
+            </h3>
+            <span className="badge bg-indigo-500/20 text-indigo-300">Wheat</span>
+          </div>
+          <div className="space-y-4">
+            <div className="flex justify-between items-end border-b border-indigo-500/20 pb-3">
+              <div>
+                <p className="text-xs text-slate-400 mb-1">Predicted Peak</p>
+                <p className="text-xl font-bold text-white">₹2,250</p>
+              </div>
+              <div className="text-right">
+                <p className="text-xs text-slate-400 mb-1">Confidence</p>
+                <p className="text-sm font-bold text-green-400">92%</p>
+              </div>
+            </div>
+            <p className="text-xs text-indigo-200 leading-relaxed">
+              <strong>Recommendation:</strong> Hold your crop for 4 more days. A temporary supply shortage is detected in your region, likely increasing prices by ~4%.
+            </p>
+          </div>
+        </div>
+        <div className="glass-card p-6 border-indigo-500/30 bg-indigo-900/10">
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="text-sm font-bold text-indigo-400 uppercase tracking-wider flex items-center gap-2">
+              <TrendingUp size={16} /> 7-Day AI Price Forecast
+            </h3>
+            <span className="badge bg-indigo-500/20 text-indigo-300">Mustard</span>
+          </div>
+          <div className="space-y-4">
+            <div className="flex justify-between items-end border-b border-indigo-500/20 pb-3">
+              <div>
+                <p className="text-xs text-slate-400 mb-1">Predicted Drop</p>
+                <p className="text-xl font-bold text-white">₹5,200</p>
+              </div>
+              <div className="text-right">
+                <p className="text-xs text-slate-400 mb-1">Confidence</p>
+                <p className="text-sm font-bold text-red-400">88%</p>
+              </div>
+            </div>
+            <p className="text-xs text-indigo-200 leading-relaxed">
+              <strong>Recommendation:</strong> Sell immediately. Incoming harvests from Rajasthan will flood the market next week, dropping prices by ~6%.
+            </p>
+          </div>
+        </div>
+      </div>
+
       {/* Disclaimer */}
       <div className="p-4 rounded-2xl flex gap-3" style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.05)' }}>
         <span style={{ fontSize: 18 }}>ℹ️</span>

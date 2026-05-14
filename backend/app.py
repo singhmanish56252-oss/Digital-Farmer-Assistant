@@ -1,9 +1,10 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS
 import random
 import datetime
+import os
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='templates', static_folder='static')
 CORS(app)
 
 # ─── Static Data ────────────────────────────────────────────────────────────
@@ -138,6 +139,10 @@ EQUIPMENT_LIST = [
 ]
 
 # ─── Original Routes ─────────────────────────────────────────────────────────
+
+@app.route('/')
+def index():
+    return render_template('index.html')
 
 @app.route('/api/weather', methods=['GET'])
 def get_weather():

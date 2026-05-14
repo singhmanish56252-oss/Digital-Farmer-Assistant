@@ -105,14 +105,18 @@ const PestAlert = () => {
                     <span style={{ fontSize: 10, padding: '4px 10px', borderRadius: 999, background: s.bg, color: s.color, border: `1px solid ${s.border}`, fontWeight: 800 }}>{s.label}</span>
                   </div>
                 </div>
-                <div className="grid grid-cols-2 gap-3 mb-4">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-4">
                   <div className="p-3 rounded-xl" style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)' }}>
                     <p style={{ fontSize: 10, color: '#475569', fontWeight: 700, textTransform: 'uppercase', marginBottom: 2 }}>👨‍🌾 Reports</p>
-                    <p style={{ fontSize: 15, fontWeight: 800, color: s.color }}>{alert.reports} farmers</p>
+                    <p style={{ fontSize: 14, fontWeight: 800, color: s.color }}>{alert.reports}</p>
                   </div>
                   <div className="p-3 rounded-xl" style={{ background: 'rgba(34,197,94,0.06)', border: '1px solid rgba(34,197,94,0.15)' }}>
-                    <p style={{ fontSize: 10, color: '#4ade80', fontWeight: 700, textTransform: 'uppercase', marginBottom: 2 }}>🛡️ Pesticide</p>
-                    <p style={{ fontSize: 12, fontWeight: 700, color: '#86efac' }}>{alert.pesticide}</p>
+                    <p style={{ fontSize: 10, color: '#4ade80', fontWeight: 700, textTransform: 'uppercase', marginBottom: 2 }}>🛡️ Chemical</p>
+                    <p style={{ fontSize: 11, fontWeight: 700, color: '#86efac', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{alert.pesticide}</p>
+                  </div>
+                  <div className="p-3 rounded-xl" style={{ background: 'rgba(56,189,248,0.06)', border: '1px solid rgba(56,189,248,0.15)' }}>
+                    <p style={{ fontSize: 10, color: '#38bdf8', fontWeight: 700, textTransform: 'uppercase', marginBottom: 2 }}>🌿 Organic</p>
+                    <p style={{ fontSize: 11, fontWeight: 700, color: '#bae6fd', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>Neem Oil / Beauveria</p>
                   </div>
                 </div>
                 <button className="btn-primary w-full justify-center" style={{ fontSize: 12 }}>

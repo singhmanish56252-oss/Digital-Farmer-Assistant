@@ -3,7 +3,7 @@ import {
   CloudSun, Sprout, Droplets, TrendingUp, ScanSearch, LayoutDashboard,
   Menu, Bell, Search, ChevronRight, Zap, Activity, ArrowUpRight,
   ArrowDownRight, Droplet, Bug, Calendar, FlaskConical, Building2,
-  Calculator, Truck, Brain
+  Calculator, Truck, Brain, Store, Sun, Moon
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -20,6 +20,10 @@ import GovSchemes from './components/GovSchemes';
 import EquipmentRental from './components/EquipmentRental';
 import VoiceAssistant from './components/VoiceAssistant';
 import SmartAdvisor from './components/SmartAdvisor';
+import SeedSelection from './components/SeedSelection';
+import IoTDashboard from './components/IoTDashboard';
+import FarmMap from './components/FarmMap';
+import FarmerMarketplace from './components/FarmerMarketplace';
 
 const NAV_GROUPS = [
   {
@@ -37,12 +41,15 @@ const NAV_GROUPS = [
       { id: 'soil',       icon: FlaskConical,  label: 'Soil Analyzer',   color: '#aed581' },
       { id: 'irrigation', icon: Droplet,       label: 'Irrigation',      color: '#4fc3f7' },
       { id: 'pest',       icon: Bug,           label: 'Pest Alerts',     color: '#ffb74d' },
+      { id: 'iot',        icon: Activity,      label: 'IoT Sensors',     color: '#38bdf8' },
+      { id: 'map',        icon: LayoutDashboard, label: 'Farm Map',        color: '#60a5fa' },
     ]
   },
   {
     label: 'Crop Management',
     items: [
       { id: 'crops',      icon: Sprout,        label: 'Crop AI',         color: '#3ddc84' },
+      { id: 'seeds',      icon: Sprout,        label: 'Seed Select',     color: '#f59e0b' },
       { id: 'fertilizer', icon: Droplets,      label: 'Fertilizer',      color: '#b57bee' },
       { id: 'calendar',   icon: Calendar,      label: 'Crop Calendar',   color: '#b57bee' },
     ]
@@ -51,6 +58,7 @@ const NAV_GROUPS = [
     label: 'Market & Finance',
     items: [
       { id: 'mandi',      icon: TrendingUp,    label: 'Mandi Live',      color: '#e8a838' },
+      { id: 'marketplace', icon: Store,        label: 'Marketplace',     color: '#f59e0b' },
       { id: 'profit',     icon: Calculator,    label: 'Profit Calc',     color: '#3ddc84' },
       { id: 'schemes',    icon: Building2,     label: 'Gov Schemes',     color: '#cf9ff5' },
     ]
@@ -79,7 +87,7 @@ const Sidebar = ({ activeTab, setActiveTab, isOpen, setIsOpen, userName }) => {
     </AnimatePresence>
 
     <div className={`fixed inset-y-0 left-0 z-50 w-64 flex flex-col transform ${isOpen ? 'translate-x-0' : '-translate-x-full'} lg:translate-x-0 transition-transform duration-300 ease-out`}
-      style={{ background: '#ffffff', borderRight: '1px solid #e2e8f0', overflowY: 'auto' }}>
+      style={{ background: 'var(--bg-sidebar)', backdropFilter: 'blur(16px)', borderRight: '1px solid var(--border-light)', overflowY: 'auto' }}>
 
       {/* Logo */}
       <div className="p-5 pb-3 flex-shrink-0">
@@ -89,16 +97,16 @@ const Sidebar = ({ activeTab, setActiveTab, isOpen, setIsOpen, userName }) => {
             <span style={{ fontSize: 20 }}>🌾</span>
           </div>
           <div>
-            <h1 style={{ fontFamily: 'Syne, sans-serif', fontSize: '18px', fontWeight: 900, color: '#0f172a', letterSpacing: '-0.02em' }}>Kisan Seva</h1>
+            <h1 style={{ fontFamily: 'Syne, sans-serif', fontSize: '18px', fontWeight: 900, color: 'var(--text-primary)', letterSpacing: '-0.02em' }}>Kisan Seva</h1>
             <p style={{ fontSize: '9px', color: 'var(--primary)', fontWeight: 800, letterSpacing: '0.14em', textTransform: 'uppercase' }}>AI Farm Platform</p>
           </div>
         </div>
         <div className="mt-1 mb-3" style={{ height: '1px', background: 'linear-gradient(90deg, #e2e8f0, transparent)' }} />
 
         {/* Live Status */}
-        <div className="px-3 py-2 rounded-xl flex items-center gap-2" style={{ background: '#f0fdf4', border: '1px solid #bbf7d0' }}>
-          <span className="animate-blink w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: '#16a34a', boxShadow: '0 0 6px #16a34a' }} />
-          <p style={{ fontSize: '10px', fontWeight: 800, color: '#166534', letterSpacing: '0.06em' }}>ALL SYSTEMS LIVE</p>
+        <div className="px-3 py-2 rounded-xl flex items-center gap-2" style={{ background: 'rgba(61, 220, 132, 0.1)', border: '1px solid rgba(61, 220, 132, 0.2)' }}>
+          <span className="animate-blink w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: '#3ddc84', boxShadow: '0 0 6px #3ddc84' }} />
+          <p style={{ fontSize: '10px', fontWeight: 800, color: '#3ddc84', letterSpacing: '0.06em' }}>ALL SYSTEMS LIVE</p>
         </div>
       </div>
 
@@ -106,7 +114,7 @@ const Sidebar = ({ activeTab, setActiveTab, isOpen, setIsOpen, userName }) => {
       <nav className="px-3 flex-1 pb-3 space-y-3">
         {NAV_GROUPS.map((group) => (
           <div key={group.label}>
-            <p style={{ fontSize: 9, fontWeight: 800, color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.14em', padding: '0 8px', marginBottom: 4 }}>{group.label}</p>
+            <p style={{ fontSize: 9, fontWeight: 800, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.14em', padding: '0 8px', marginBottom: 4 }}>{group.label}</p>
             <div className="space-y-0.5">
               {group.items.map((item) => {
                 const isActive = activeTab === item.id;
@@ -114,19 +122,19 @@ const Sidebar = ({ activeTab, setActiveTab, isOpen, setIsOpen, userName }) => {
                   <button key={item.id} onClick={() => { setActiveTab(item.id); setIsOpen(false); }}
                     className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all"
                     style={isActive ? {
-                      background: '#f0fdf4',
-                      border: '1px solid #bbf7d0',
-                      color: '#16a34a',
+                      background: 'rgba(61, 220, 132, 0.1)',
+                      border: '1px solid rgba(61, 220, 132, 0.2)',
+                      color: '#3ddc84',
                     } : {
                       background: 'transparent',
                       border: '1px solid transparent',
-                      color: '#475569',
+                      color: '#94a3b8',
                     }}>
-                    <div className="p-1.5 rounded-lg flex-shrink-0" style={{ background: isActive ? '#dcfce7' : '#f1f5f9', border: `1px solid ${isActive ? '#bbf7d0' : '#e2e8f0'}` }}>
-                      <item.icon size={13} style={{ color: isActive ? '#16a34a' : '#64748b' }} />
+                    <div className="p-1.5 rounded-lg flex-shrink-0" style={{ background: isActive ? 'rgba(61, 220, 132, 0.2)' : 'rgba(255, 255, 255, 0.05)', border: `1px solid ${isActive ? 'rgba(61, 220, 132, 0.3)' : 'rgba(255, 255, 255, 0.1)'}` }}>
+                      <item.icon size={13} style={{ color: isActive ? '#3ddc84' : '#64748b' }} />
                     </div>
                     <span style={{ fontFamily: 'Nunito, sans-serif', fontSize: 13, fontWeight: isActive ? 800 : 600 }}>{item.label}</span>
-                    {isActive && <div className="ml-auto w-1 h-4 rounded-full" style={{ background: '#16a34a' }} />}
+                    {isActive && <div className="ml-auto w-1 h-4 rounded-full" style={{ background: '#3ddc84', boxShadow: '0 0 8px #3ddc84' }} />}
                   </button>
                 );
               })}
@@ -137,12 +145,12 @@ const Sidebar = ({ activeTab, setActiveTab, isOpen, setIsOpen, userName }) => {
 
       {/* User */}
       <div className="p-3 flex-shrink-0">
-        <div className="p-3 rounded-2xl flex items-center gap-3" style={{ background: '#f8fafc', border: '1px solid #e2e8f0' }}>
+        <div className="p-3 rounded-2xl flex items-center gap-3" style={{ background: 'rgba(255, 255, 255, 0.03)', border: '1px solid rgba(255, 255, 255, 0.08)' }}>
           <div className="w-10 h-10 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 uppercase"
-            style={{ background: 'var(--primary)', color: '#ffffff', fontFamily: 'Syne, sans-serif', fontWeight: 900, fontSize: 14 }}>{initials}</div>
+            style={{ background: 'var(--primary)', color: 'var(--text-inverse)', fontFamily: 'Syne, sans-serif', fontWeight: 900, fontSize: 14 }}>{initials}</div>
           <div>
-            <p style={{ fontFamily: 'Nunito, sans-serif', fontSize: 13, fontWeight: 800, color: '#0f172a' }}>{userName}</p>
-            <p style={{ fontSize: 9, color: '#f59e0b', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.08em' }}>★ Premium Member</p>
+            <p style={{ fontFamily: 'Nunito, sans-serif', fontSize: 13, fontWeight: 800, color: 'var(--text-primary)' }}>{userName}</p>
+            <p style={{ fontSize: 9, color: '#fbbf24', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.08em' }}>★ Premium Member</p>
           </div>
         </div>
       </div>
@@ -151,29 +159,36 @@ const Sidebar = ({ activeTab, setActiveTab, isOpen, setIsOpen, userName }) => {
   );
 };
 
-const Header = ({ toggleSidebar, activeTab, setRoute }) => {
+const Header = ({ toggleSidebar, activeTab, setRoute, theme, toggleTheme }) => {
   const current = ALL_ITEMS.find(m => m.id === activeTab) || ALL_ITEMS[0];
   return (
     <header className="sticky top-0 z-30 flex items-center justify-between px-6 py-4"
-      style={{ background: 'rgba(255,255,255,0.95)', backdropFilter: 'blur(24px)', borderBottom: '1px solid #e2e8f0' }}>
+      style={{ background: 'var(--bg-header)', backdropFilter: 'blur(24px)', borderBottom: '1px solid var(--border-light)' }}>
       <div className="flex items-center gap-4">
-        <button onClick={toggleSidebar} className="lg:hidden p-2 rounded-xl bg-slate-50 border border-slate-200">
-          <Menu size={18} className="text-slate-500" />
+        <button onClick={toggleSidebar} className="lg:hidden p-2 rounded-xl bg-slate-800/50 border border-slate-700">
+          <Menu size={18} className="text-slate-400" />
         </button>
         <div>
-          <p style={{ fontFamily: 'Nunito, sans-serif', fontSize: 10, color: '#64748b', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.1em' }}>🌱 Kisan Seva Platform</p>
-          <h2 style={{ fontFamily: 'Syne, sans-serif', fontSize: '18px', fontWeight: 900, color: '#0f172a', letterSpacing: '-0.01em' }}>{current.label}</h2>
+          <p style={{ fontFamily: 'Nunito, sans-serif', fontSize: 10, color: 'var(--text-muted)', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.1em' }}>🌱 Kisan Seva Platform</p>
+          <h2 style={{ fontFamily: 'Syne, sans-serif', fontSize: '18px', fontWeight: 900, color: 'var(--text-primary)', letterSpacing: '-0.01em' }}>{current.label}</h2>
         </div>
       </div>
       <div className="flex items-center gap-3">
         <div className="relative hidden md:block">
           <Search size={14} style={{ position:'absolute', left:12, top:'50%', transform:'translateY(-50%)', color:'#94a3b8' }} />
           <input type="text" placeholder="Search features..."
-            style={{ paddingLeft: 34, paddingRight: 16, paddingTop: 8, paddingBottom: 8, background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: 12, width: 200, fontSize: 13, color: '#475569', outline: 'none', fontFamily: 'Nunito, sans-serif' }} />
+            style={{ paddingLeft: 34, paddingRight: 16, paddingTop: 8, paddingBottom: 8, background: 'rgba(255,255,255,0.05)', border: '1px solid var(--border-light)', borderRadius: 12, width: 200, fontSize: 13, color: 'var(--text-primary)', outline: 'none', fontFamily: 'Nunito, sans-serif' }} />
         </div>
-        <button className="relative p-2.5 rounded-xl bg-slate-50 border border-slate-200 hover:bg-slate-100 transition-colors">
-          <Bell size={16} className="text-slate-500" />
-          <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full" style={{ background: '#ef4444' }} />
+        
+        {/* Theme Toggle */}
+        <button onClick={toggleTheme} className="p-2.5 rounded-xl bg-slate-800/10 border border-slate-700/20 hover:bg-slate-800/20 transition-all"
+          title={theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}>
+          {theme === 'dark' ? <Sun size={16} className="text-amber-400" /> : <Moon size={16} className="text-slate-600" />}
+        </button>
+
+        <button className="relative p-2.5 rounded-xl bg-slate-800/10 border border-slate-700/20 hover:bg-slate-800/20 transition-colors">
+          <Bell size={16} className="text-slate-400" />
+          <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full" style={{ background: '#ef4444', boxShadow: '0 0 8px #ef4444' }} />
         </button>
         <button className="btn-ghost !px-3" onClick={() => setRoute('landing')}>
           Log Out
@@ -192,11 +207,15 @@ const DashboardHome = ({ setActiveTab, userName, userLocation }) => {
     { id: 'crops',      icon: Sprout,        label: 'Crop AI',         sub: 'Best picks',       color: '#3ddc84' },
     { id: 'calendar',   icon: Calendar,      label: 'Crop Calendar',   sub: 'Task reminders',   color: '#b57bee' },
     { id: 'mandi',      icon: TrendingUp,    label: 'Mandi Prices',    sub: 'Live trading',     color: '#e8a838' },
+    { id: 'marketplace', icon: Store,        label: 'Marketplace',     sub: 'Sell directly',    color: '#f59e0b' },
     { id: 'profit',     icon: Calculator,    label: 'Profit Calc',     sub: 'ROI planning',     color: '#3ddc84' },
     { id: 'soil',       icon: FlaskConical,  label: 'Soil Analyzer',   sub: 'NPK & pH',         color: '#aed581' },
     { id: 'schemes',    icon: Building2,     label: 'Gov Schemes',     sub: 'Benefits finder',  color: '#cf9ff5' },
     { id: 'equipment',  icon: Truck,         label: 'Equipment Rent',  sub: 'Tractors & more',  color: '#ffb74d' },
     { id: 'fertilizer', icon: Droplets,      label: 'Fertilizer',      sub: 'Per-crop guide',  color: '#8b5cf6' },
+    { id: 'seeds',      icon: Sprout,        label: 'Seed Select',     sub: 'Best varieties',   color: '#f59e0b' },
+    { id: 'iot',        icon: Activity,      label: 'IoT Dashboard',   sub: 'Smart farming',    color: '#38bdf8' },
+    { id: 'map',        icon: LayoutDashboard, label: 'Farm Map',        sub: 'GPS & Area',       color: '#60a5fa' },
   ];
 
   const alerts = [
@@ -213,10 +232,10 @@ const DashboardHome = ({ setActiveTab, userName, userLocation }) => {
       {/* Greeting */}
       <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }}>
         <p className="section-label mb-2">☀️ Good Morning</p>
-        <h2 style={{ fontFamily: 'Syne, sans-serif', fontSize: '2.2rem', fontWeight: 900, letterSpacing: '-0.02em', color: '#e8f5ec' }}>
+        <h2 style={{ fontFamily: 'Syne, sans-serif', fontSize: '2.2rem', fontWeight: 900, letterSpacing: '-0.02em', color: 'var(--text-primary)' }}>
           Namaste, <span className="gradient-text">{userName}</span>
         </h2>
-        <p style={{ color: '#8fb89a', fontSize: 13, marginTop: 4, fontWeight: 600 }}>{userLocation} · {currentDate} · 🌾 Wheat Season Active</p>
+        <p style={{ color: 'var(--text-secondary)', fontSize: 13, marginTop: 4, fontWeight: 600 }}>{userLocation} · {currentDate} · 🌾 Wheat Season Active</p>
       </motion.div>
 
       {/* Top Stats */}
@@ -231,11 +250,11 @@ const DashboardHome = ({ setActiveTab, userName, userLocation }) => {
             className="glass-card p-5 cursor-pointer group" onClick={() => setActiveTab(s.id)}>
             <div className="flex justify-between items-start mb-3">
               <span style={{ fontSize: 24 }}>{s.icon}</span>
-              <ArrowUpRight size={14} style={{ color: '#4a6855', transition: 'color 0.2s' }} />
+              <ArrowUpRight size={14} className="text-slate-400 group-hover:text-primary transition-colors" />
             </div>
-            <p style={{ fontSize: 10, color: '#8fb89a', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 2 }}>{s.label}</p>
+            <p style={{ fontSize: 10, color: 'var(--text-secondary)', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 2 }}>{s.label}</p>
             <p className="stat-num" style={{ fontSize: '1.8rem', color: s.color }}>{s.val}</p>
-            <p style={{ fontSize: 11, color: '#4a6855', fontWeight: 700 }}>{s.sub}</p>
+            <p style={{ fontSize: 11, color: 'var(--text-muted)', fontWeight: 700 }}>{s.sub}</p>
           </motion.div>
         ))}
       </div>
@@ -248,7 +267,7 @@ const DashboardHome = ({ setActiveTab, userName, userLocation }) => {
               <div className="p-2 rounded-xl" style={{ background: 'rgba(232,168,56,0.12)', border: '1px solid rgba(232,168,56,0.2)' }}>
                 <Zap size={16} style={{ color: '#e8a838' }} />
               </div>
-              <h3 style={{ fontFamily: 'Syne, sans-serif', fontSize: 16, fontWeight: 900, color: '#e8f5ec' }}>Priority Alerts</h3>
+              <h3 style={{ fontFamily: 'Syne, sans-serif', fontSize: 16, fontWeight: 900, color: 'var(--text-primary)' }}>Priority Alerts</h3>
             </div>
             <span className="badge badge-amber">
               {alerts.length} Active
@@ -265,8 +284,8 @@ const DashboardHome = ({ setActiveTab, userName, userLocation }) => {
                 style={{ background: 'rgba(61,220,132,0.03)', border: '1px solid rgba(61,220,132,0.08)' }}>
                 <div className="w-1 h-10 rounded-full flex-shrink-0 mt-0.5" style={{ background: mappedColor, boxShadow: `0 0 8px ${mappedColor}60` }} />
                 <div className="flex-1 min-w-0">
-                  <h4 style={{ fontSize: 13, fontWeight: 800, color: '#e8f5ec', marginBottom: 2 }}>{a.title}</h4>
-                  <p style={{ fontSize: 12, color: '#8fb89a', lineHeight: 1.5 }}>{a.desc}</p>
+                  <h4 style={{ fontSize: 13, fontWeight: 800, color: 'var(--text-primary)', marginBottom: 2 }}>{a.title}</h4>
+                  <p style={{ fontSize: 12, color: 'var(--text-secondary)', lineHeight: 1.5 }}>{a.desc}</p>
                 </div>
                 <span style={{ fontSize: 9, padding: '3px 8px', borderRadius: 999, background: `${mappedColor}20`, color: mappedColor, fontWeight: 800, textTransform: 'uppercase', flexShrink: 0 }}>{a.priority}</span>
               </div>
@@ -275,17 +294,17 @@ const DashboardHome = ({ setActiveTab, userName, userLocation }) => {
         </motion.div>
 
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }} className="lg:col-span-2 space-y-4">
-          <div className="glass-card p-5 glow-green" style={{ background: 'rgba(61,220,132,0.05)', border: '1px solid rgba(61,220,132,0.2)' }}>
+          <div className="glass-card p-5 glow-green" style={{ background: 'var(--primary-light)', border: '1px solid var(--primary)' }}>
             <ScanSearch size={28} style={{ color: '#3ddc84', marginBottom: 10 }} className="animate-float" />
-            <h3 style={{ fontFamily: 'Syne, sans-serif', fontSize: 16, fontWeight: 900, color: '#e8f5ec', marginBottom: 6 }}>AI Crop Scan</h3>
-            <p style={{ fontSize: 12, color: '#8fb89a', marginBottom: 14, lineHeight: 1.6 }}>Detect crop diseases instantly with 95%+ accuracy using our deep learning model.</p>
+            <h3 style={{ fontFamily: 'Syne, sans-serif', fontSize: 16, fontWeight: 900, color: 'var(--text-primary)', marginBottom: 6 }}>AI Crop Scan</h3>
+            <p style={{ fontSize: 12, color: 'var(--text-secondary)', marginBottom: 14, lineHeight: 1.6 }}>Detect crop diseases instantly with 95%+ accuracy using our deep learning model.</p>
             <button className="btn-primary w-full justify-center" onClick={() => setActiveTab('disease')} style={{ fontSize: 13 }}>
               <ScanSearch size={15} /> Start Scan
             </button>
           </div>
           <div className="glass-card p-5">
             <div className="flex items-center justify-between mb-4">
-              <h3 style={{ fontFamily: 'Syne, sans-serif', fontSize: 14, fontWeight: 800, color: '#e8f5ec' }}>Live Market</h3>
+              <h3 style={{ fontFamily: 'Syne, sans-serif', fontSize: 14, fontWeight: 800, color: 'var(--text-primary)' }}>Live Market</h3>
               <span className="badge badge-green animate-blink">● Live</span>
             </div>
             {[
@@ -293,8 +312,8 @@ const DashboardHome = ({ setActiveTab, userName, userLocation }) => {
               { name: 'Rice', price: 2400, change: '-1.2%', up: false },
               { name: 'Mustard', price: 5400, change: '+3.1%', up: true },
             ].map((c, i) => (
-              <div key={i} className="flex items-center justify-between py-2" style={{ borderBottom: i < 2 ? '1px solid rgba(61,220,132,0.08)' : 'none' }}>
-                <span style={{ fontSize: 13, fontWeight: 700, color: '#e8f5ec' }}>{c.name}</span>
+              <div key={i} className="flex items-center justify-between py-2" style={{ borderBottom: i < 2 ? '1px solid var(--border-light)' : 'none' }}>
+                <span style={{ fontSize: 13, fontWeight: 700, color: 'var(--text-primary)' }}>{c.name}</span>
                 <div className="flex items-center gap-3">
                   <span style={{ fontFamily: 'Syne, sans-serif', fontSize: 15, fontWeight: 900, color: '#e8a838' }}>₹{c.price}</span>
                   <span style={{ fontSize: 11, fontWeight: 800, color: c.up ? '#3ddc84' : '#ff6b35', display:'flex', alignItems:'center', gap:2 }}>
@@ -325,8 +344,8 @@ const DashboardHome = ({ setActiveTab, userName, userLocation }) => {
                 <div className="p-2 w-fit rounded-lg mb-3" style={{ background: `${f.color}18`, border: `1px solid ${f.color}22` }}>
                   <f.icon size={16} style={{ color: f.color }} />
                 </div>
-                <p style={{ fontSize: 12, fontWeight: 800, color: '#e8f5ec', marginBottom: 2 }}>{f.label}</p>
-                <p style={{ fontSize: 10, color: '#8fb89a' }}>{f.sub}</p>
+                <p style={{ fontSize: 12, fontWeight: 800, color: 'var(--text-primary)', marginBottom: 2 }}>{f.label}</p>
+                <p style={{ fontSize: 10, color: 'var(--text-secondary)' }}>{f.sub}</p>
               </div>
             </motion.button>
           ))}
@@ -339,6 +358,14 @@ const DashboardHome = ({ setActiveTab, userName, userLocation }) => {
 const App = ({ setRoute, userName, userLocation }) => {
   const [activeTab, setActiveTab] = useState('dashboard');
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [theme, setTheme] = useState(localStorage.getItem('theme') || 'dark');
+
+  useEffect(() => {
+    document.documentElement.className = theme;
+    localStorage.setItem('theme', theme);
+  }, [theme]);
+
+  const toggleTheme = () => setTheme(prev => prev === 'dark' ? 'light' : 'dark');
 
   const renderContent = () => {
     switch (activeTab) {
@@ -347,6 +374,7 @@ const App = ({ setRoute, userName, userLocation }) => {
       case 'crops':      return <CropSuggestion />;
       case 'fertilizer': return <FertilizerGuide />;
       case 'mandi':      return <MandiPrices />;
+      case 'marketplace': return <FarmerMarketplace />;
       case 'disease':    return <DiseaseDetection />;
       case 'irrigation': return <IrrigationAdvisor />;
       case 'pest':       return <PestAlert />;
@@ -356,15 +384,18 @@ const App = ({ setRoute, userName, userLocation }) => {
       case 'profit':     return <ProfitCalculator />;
       case 'equipment':  return <EquipmentRental />;
       case 'advisor':    return <SmartAdvisor userLocation={userLocation} />;
+      case 'seeds':      return <SeedSelection />;
+      case 'iot':        return <IoTDashboard />;
+      case 'map':        return <FarmMap />;
       default:           return <DashboardHome setActiveTab={setActiveTab} userName={userName} userLocation={userLocation} />;
     }
   };
 
   return (
-    <div className="min-h-screen flex bg-main">
+    <div className={`min-h-screen flex bg-main ${theme}`}>
       <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} userName={userName} />
       <div className="flex-1 lg:ml-64 flex flex-col min-h-screen">
-        <Header toggleSidebar={() => setIsSidebarOpen(true)} activeTab={activeTab} setRoute={setRoute} />
+        <Header toggleSidebar={() => setIsSidebarOpen(true)} activeTab={activeTab} setRoute={setRoute} theme={theme} toggleTheme={toggleTheme} />
         <main className="p-4 md:p-8 flex-1">
           <AnimatePresence mode="wait">
             <motion.div key={activeTab}
