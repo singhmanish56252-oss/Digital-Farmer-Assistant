@@ -28,6 +28,12 @@ npm run dev
 ### Backend
 ```bash
 cd backend
+# Create and activate virtual environment
+python -m venv venv
+.\venv\Scripts\activate
+# Install dependencies
+pip install -r requirements.txt
+# Run the server
 python app.py
 ```
 
