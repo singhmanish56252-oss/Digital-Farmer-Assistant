@@ -26,14 +26,20 @@ npm run dev
 ```
 
 ### Backend
-```bash
+```powershell
 cd backend
-# Create and activate virtual environment
+# Create virtual environment (if not exists)
 python -m venv venv
+
+# OPTION 1: Direct Run (Recommended for Windows)
+.\venv\Scripts\python.exe -m pip install -r requirements.txt
+.\venv\Scripts\python.exe app.py
+
+# OPTION 2: Activation (If you see "running scripts is disabled" error)
+# Run this in PowerShell as Administrator:
+# Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 .\venv\Scripts\activate
-# Install dependencies
 pip install -r requirements.txt
-# Run the server
 python app.py
 ```
 
