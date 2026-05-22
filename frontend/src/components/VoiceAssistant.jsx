@@ -96,6 +96,12 @@ const VoiceAssistant = ({ setActiveTab, userLocation = 'New Delhi' }) => {
     } else if (cmd.includes('scheme') || cmd.includes('yojana') || cmd.includes('loan')) {
       reply = "सरकारी योजनाओं की सूची यहाँ है। पीएम किसान योजना अभी खुली है।";
       targetTab = 'schemes';
+    } else if (cmd.includes('satellite') || cmd.includes('सैटेलाइट') || cmd.includes('space')) {
+      reply = "सैटेलाइट विश्लेषण खुला है। आपके खेत का स्वास्थ्य 0.72 NDVI है।";
+      targetTab = 'satellite';
+    } else if (cmd.includes('blockchain') || cmd.includes('traceability') || cmd.includes('batch')) {
+      reply = "ब्लॉकचेन ट्रैसेबिलिटी खुली है। आपका नवीनतम बैच सत्यापित है।";
+      targetTab = 'blockchain';
     } else {
       reply = "क्षमा करें, मैं समझ नहीं पाया। आप मौसम, मंडी भाव, या बीमारी स्कैन के बारे में पूछ सकते हैं।";
     }

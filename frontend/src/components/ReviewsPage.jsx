@@ -28,14 +28,14 @@ const ReviewsPage = ({ setRoute }) => {
   return (
     <div className="min-h-screen bg-main animate-fade-in pb-20">
       {/* Header */}
-      <header className="bg-white border-b border-light sticky top-0 z-50 shadow-sm px-8 py-4 flex items-center justify-between">
+      <header className="border-b border-light sticky top-0 z-50 shadow-sm px-8 py-4 flex items-center justify-between" style={{ background: 'var(--bg-header)', backdropFilter: 'blur(20px)' }}>
         <div className="flex items-center gap-4">
           <button className="p-2 rounded-full hover:bg-slate-100 text-slate-500 transition-colors" onClick={() => setRoute('landing')}>
             <ArrowLeft size={20} />
           </button>
           <div className="flex items-center gap-2 cursor-pointer" onClick={() => setRoute('landing')}>
             <span className="text-xl">🌾</span>
-            <span className="text-lg font-black text-slate-800" style={{ fontFamily: 'Syne, sans-serif' }}>Kisan Seva</span>
+            <span className="text-lg font-black" style={{ fontFamily: 'Syne, sans-serif', color: 'var(--text-primary)' }}>Kisan Seva</span>
           </div>
         </div>
         <button className="btn-primary" onClick={() => setRoute('app')}>Open App</button>
@@ -47,17 +47,17 @@ const ReviewsPage = ({ setRoute }) => {
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-100 text-green-800 font-bold text-sm mb-4">
             <Star size={16} fill="currentColor" /> 4.9 out of 5 from 10,000+ farmers
           </div>
-          <h1 className="text-4xl md:text-5xl font-black text-slate-800 mb-4" style={{ fontFamily: 'Syne, sans-serif' }}>
+          <h1 className="text-4xl md:text-5xl font-black mb-4" style={{ fontFamily: 'Syne, sans-serif', color: 'var(--text-primary)' }}>
             Hear from our community
           </h1>
-          <p className="text-lg text-slate-600 font-medium max-w-2xl mx-auto">
+          <p className="text-lg font-medium max-w-2xl mx-auto" style={{ color: 'var(--text-secondary)' }}>
             Real stories from real farmers across India who have transformed their yield and profits using our digital platform.
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {reviews.map((rev, i) => (
-            <div key={i} className="glass-card p-8 bg-white hover:-translate-y-1 transition-transform">
+            <div key={i} className="glass-card p-8 hover:-translate-y-1 transition-transform">
               <div className="flex items-start justify-between mb-4">
                 <div className="flex gap-1">
                   {[...Array(5)].map((_, j) => (
@@ -66,8 +66,8 @@ const ReviewsPage = ({ setRoute }) => {
                 </div>
                 <span className="text-xs font-bold text-slate-400">{rev.date}</span>
               </div>
-              <h3 className="text-xl font-bold text-slate-800 mb-3">{rev.title}</h3>
-              <p className="text-slate-600 font-medium leading-relaxed mb-6">"{rev.text}"</p>
+              <h3 className="text-xl font-bold mb-3" style={{ color: 'var(--text-primary)' }}>{rev.title}</h3>
+              <p className="font-medium leading-relaxed mb-6" style={{ color: 'var(--text-secondary)' }}>"{rev.text}"</p>
               
               <div className="flex items-center justify-between pt-4 border-t border-slate-100">
                 <div className="flex items-center gap-3">
@@ -88,9 +88,9 @@ const ReviewsPage = ({ setRoute }) => {
         </div>
 
         {/* CTA */}
-        <div className="mt-16 text-center glass-card p-12 bg-white">
-          <h2 className="text-2xl font-black text-slate-800 mb-4" style={{ fontFamily: 'Syne, sans-serif' }}>Have a story to share?</h2>
-          <p className="text-slate-600 font-medium mb-6">Join the community and help other farmers make better decisions.</p>
+        <div className="mt-16 text-center glass-card p-12">
+          <h2 className="text-2xl font-black mb-4" style={{ fontFamily: 'Syne, sans-serif', color: 'var(--text-primary)' }}>Have a story to share?</h2>
+          <p className="font-medium mb-6" style={{ color: 'var(--text-secondary)' }}>Join the community and help other farmers make better decisions.</p>
           <button className="btn-primary" onClick={() => setRoute('login')}>
             <MessageCircle size={18} /> Write a Review
           </button>

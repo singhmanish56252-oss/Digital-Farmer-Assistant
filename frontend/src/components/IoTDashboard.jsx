@@ -21,7 +21,7 @@ const IoTDashboard = () => {
         return { ...s, value: Math.max(0, s.value + diff) };
       }));
       setIsUpdating(false);
-    }, 1000);
+    }, 400);
   };
 
   useEffect(() => {
@@ -34,7 +34,7 @@ const IoTDashboard = () => {
     if (!pumpActive) {
       setTimeout(() => {
         setSensors(sensors.map(s => s.id === 'S2' ? { ...s, value: 45, status: 'optimal' } : s));
-      }, 3000);
+      }, 1000);
     }
   };
 

@@ -3,7 +3,7 @@ import {
   CloudSun, Sprout, Droplets, TrendingUp, ScanSearch, LayoutDashboard,
   Menu, Bell, Search, ChevronRight, Zap, Activity, ArrowUpRight,
   ArrowDownRight, Droplet, Bug, Calendar, FlaskConical, Building2,
-  Calculator, Truck, Brain, Store, Sun, Moon
+  Calculator, Truck, Brain, Store, Sun, Moon, Satellite, ShieldCheck
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -24,6 +24,9 @@ import SeedSelection from './components/SeedSelection';
 import IoTDashboard from './components/IoTDashboard';
 import FarmMap from './components/FarmMap';
 import FarmerMarketplace from './components/FarmerMarketplace';
+import ProfitCalculator from './components/ProfitCalculator';
+import SatelliteMonitoring from './components/SatelliteMonitoring';
+import BlockchainTraceability from './components/BlockchainTraceability';
 
 const NAV_GROUPS = [
   {
@@ -42,6 +45,7 @@ const NAV_GROUPS = [
       { id: 'irrigation', icon: Droplet,       label: 'Irrigation',      color: '#4fc3f7' },
       { id: 'pest',       icon: Bug,           label: 'Pest Alerts',     color: '#ffb74d' },
       { id: 'iot',        icon: Activity,      label: 'IoT Sensors',     color: '#38bdf8' },
+      { id: 'satellite',  icon: Satellite,     label: 'Satellite AI',    color: '#60a5fa' },
       { id: 'map',        icon: LayoutDashboard, label: 'Farm Map',        color: '#60a5fa' },
     ]
   },
@@ -59,6 +63,7 @@ const NAV_GROUPS = [
     items: [
       { id: 'mandi',      icon: TrendingUp,    label: 'Mandi Live',      color: '#e8a838' },
       { id: 'marketplace', icon: Store,        label: 'Marketplace',     color: '#f59e0b' },
+      { id: 'blockchain',  icon: ShieldCheck,   label: 'Traceability',    color: '#10b981' },
       { id: 'profit',     icon: Calculator,    label: 'Profit Calc',     color: '#3ddc84' },
       { id: 'schemes',    icon: Building2,     label: 'Gov Schemes',     color: '#cf9ff5' },
     ]
@@ -159,7 +164,7 @@ const Sidebar = ({ activeTab, setActiveTab, isOpen, setIsOpen, userName }) => {
   );
 };
 
-const Header = ({ toggleSidebar, activeTab, setRoute, theme, toggleTheme }) => {
+const Header = ({ toggleSidebar, activeTab, handleLogout, theme, toggleTheme }) => {
   const current = ALL_ITEMS.find(m => m.id === activeTab) || ALL_ITEMS[0];
   return (
     <header className="sticky top-0 z-30 flex items-center justify-between px-6 py-4"
@@ -190,7 +195,7 @@ const Header = ({ toggleSidebar, activeTab, setRoute, theme, toggleTheme }) => {
           <Bell size={16} className="text-slate-400" />
           <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full" style={{ background: '#ef4444', boxShadow: '0 0 8px #ef4444' }} />
         </button>
-        <button className="btn-ghost !px-3" onClick={() => setRoute('landing')}>
+        <button className="btn-ghost !px-3" onClick={handleLogout}>
           Log Out
         </button>
       </div>
@@ -215,6 +220,8 @@ const DashboardHome = ({ setActiveTab, userName, userLocation }) => {
     { id: 'fertilizer', icon: Droplets,      label: 'Fertilizer',      sub: 'Per-crop guide',  color: '#8b5cf6' },
     { id: 'seeds',      icon: Sprout,        label: 'Seed Select',     sub: 'Best varieties',   color: '#f59e0b' },
     { id: 'iot',        icon: Activity,      label: 'IoT Dashboard',   sub: 'Smart farming',    color: '#38bdf8' },
+    { id: 'satellite',  icon: Satellite,     label: 'Satellite AI',    sub: 'Spectral analysis', color: '#60a5fa' },
+    { id: 'blockchain', icon: ShieldCheck,   label: 'Traceability',    sub: 'Supply chain',     color: '#10b981' },
     { id: 'map',        icon: LayoutDashboard, label: 'Farm Map',        sub: 'GPS & Area',       color: '#60a5fa' },
   ];
 
@@ -355,17 +362,19 @@ const DashboardHome = ({ setActiveTab, userName, userLocation }) => {
   );
 };
 
-const App = ({ setRoute, userName, userLocation }) => {
+const App = ({ setRoute, userName, userLocation, theme, toggleTheme, setIsLoggedIn }) => {
   const [activeTab, setActiveTab] = useState('dashboard');
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [theme, setTheme] = useState(localStorage.getItem('theme') || 'dark');
 
-  useEffect(() => {
-    document.documentElement.className = theme;
-    localStorage.setItem('theme', theme);
-  }, [theme]);
+  const handleLogout = () => {
+    localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem('userName');
+    localStorage.removeItem('userLocation');
+    setIsLoggedIn(false);
+    setRoute('landing');
+  };
 
-  const toggleTheme = () => setTheme(prev => prev === 'dark' ? 'light' : 'dark');
+
 
   const renderContent = () => {
     switch (activeTab) {
@@ -386,6 +395,8 @@ const App = ({ setRoute, userName, userLocation }) => {
       case 'advisor':    return <SmartAdvisor userLocation={userLocation} />;
       case 'seeds':      return <SeedSelection />;
       case 'iot':        return <IoTDashboard />;
+      case 'satellite':  return <SatelliteMonitoring />;
+      case 'blockchain': return <BlockchainTraceability />;
       case 'map':        return <FarmMap />;
       default:           return <DashboardHome setActiveTab={setActiveTab} userName={userName} userLocation={userLocation} />;
     }
@@ -395,7 +406,7 @@ const App = ({ setRoute, userName, userLocation }) => {
     <div className={`min-h-screen flex bg-main ${theme}`}>
       <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} userName={userName} />
       <div className="flex-1 lg:ml-64 flex flex-col min-h-screen">
-        <Header toggleSidebar={() => setIsSidebarOpen(true)} activeTab={activeTab} setRoute={setRoute} theme={theme} toggleTheme={toggleTheme} />
+        <Header toggleSidebar={() => setIsSidebarOpen(true)} activeTab={activeTab} handleLogout={handleLogout} theme={theme} toggleTheme={toggleTheme} />
         <main className="p-4 md:p-8 flex-1">
           <AnimatePresence mode="wait">
             <motion.div key={activeTab}

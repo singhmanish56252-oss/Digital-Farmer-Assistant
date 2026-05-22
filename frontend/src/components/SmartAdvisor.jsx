@@ -28,7 +28,7 @@ const SmartAdvisor = ({ userLocation }) => {
         overall: 'Your Wheat crop is in the Tillering stage. Focus on irrigation and nitrogen management this week for maximum yield.'
       });
       setStep(2);
-    }, 2500);
+    }, 800);
   };
 
   const reset = () => {
@@ -43,15 +43,15 @@ const SmartAdvisor = ({ userLocation }) => {
           <Brain size={28} />
         </div>
         <div>
-          <h2 className="text-3xl font-black text-slate-800" style={{ fontFamily: 'Syne, sans-serif' }}>Connected AI Advisor</h2>
+          <h2 className="text-3xl font-black" style={{ fontFamily: 'Syne, sans-serif', color: 'var(--text-primary)' }}>Connected AI Advisor</h2>
           <p className="text-sm font-bold text-slate-500 uppercase tracking-widest mt-1">Rule-Based Expert System</p>
         </div>
       </div>
 
       <AnimatePresence mode="wait">
         {step === 1 && !loading && (
-          <motion.div key="form" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, x: -20 }} className="glass-card p-8 bg-white shadow-sm border border-slate-200">
-            <h3 className="text-xl font-bold text-slate-800 mb-6 flex items-center gap-2"><Sparkles className="text-amber-500" /> Enter Farm Details</h3>
+          <motion.div key="form" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, x: -20 }} className="glass-card p-8 shadow-sm border border-slate-200">
+            <h3 className="text-xl font-bold mb-6 flex items-center gap-2" style={{ color: 'var(--text-primary)' }}><Sparkles className="text-amber-500" /> Enter Farm Details</h3>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
               <div>
@@ -92,7 +92,7 @@ const SmartAdvisor = ({ userLocation }) => {
               <div className="w-24 h-24 border-4 border-slate-100 border-t-primary rounded-full animate-spin"></div>
               <Brain className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-primary" size={32} />
             </div>
-            <h3 className="text-xl font-bold text-slate-800 mt-8 mb-2">AI is analyzing your farm...</h3>
+            <h3 className="text-xl font-bold mt-8 mb-2" style={{ color: 'var(--text-primary)' }}>AI is analyzing your farm...</h3>
             <div className="space-y-2 text-center text-slate-500 font-medium text-sm">
               <p className="animate-pulse">Fetching live weather for {formData.location}...</p>
               <p className="animate-pulse" style={{ animationDelay: '0.5s' }}>Checking {formData.soilType} soil parameters...</p>

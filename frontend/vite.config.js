@@ -34,7 +34,7 @@ export default defineConfig({
         theme_color: '#16a34a',
         icons: [
           {
-            src: '/hero.png',
+            src: 'hero.png',
             sizes: '192x192',
             type: 'image/png'
           }

@@ -24,7 +24,7 @@ const LandingPage = ({ setRoute }) => {
             <p className="text-[10px] font-bold text-secondary uppercase tracking-widest">Digital Farming</p>
           </div>
         </div>
-        <div className="hidden md:flex items-center gap-8 text-sm font-bold text-secondary-text">
+        <div className="hidden md:flex items-center gap-8 text-sm font-bold text-slate-400">
           <button className="hover:text-primary transition-colors">Features</button>
           <button className="hover:text-primary transition-colors" onClick={() => setRoute('reviews')}>Reviews</button>
           <button className="hover:text-primary transition-colors">Pricing</button>
@@ -39,7 +39,7 @@ const LandingPage = ({ setRoute }) => {
       <section className="relative px-8 py-20 md:py-32 overflow-hidden flex flex-col md:flex-row items-center gap-12 max-w-7xl mx-auto">
         <div className="flex-1 z-10">
           <div className="badge badge-green mb-6 px-4 py-2 text-xs">✨ The Future of Indian Agriculture</div>
-          <h2 className="text-5xl md:text-7xl font-black mb-6 leading-[1.1]" style={{ fontFamily: 'Syne, sans-serif', color: '#0f172a' }}>
+          <h2 className="text-5xl md:text-7xl font-black mb-6 leading-[1.1]" style={{ fontFamily: 'Syne, sans-serif', color: 'var(--text-primary)' }}>
             Farm smarter, <br />
             <span className="gradient-text">yield bigger.</span>
           </h2>
@@ -73,7 +73,7 @@ const LandingPage = ({ setRoute }) => {
 
         <div className="flex-1 relative z-10 w-full">
           <div className="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white bg-white">
-            <img src="/hero.png" alt="Modern Farmer" className="w-full h-auto object-cover" style={{ maxHeight: 500 }} />
+            <img src={`${import.meta.env.BASE_URL}hero.png`} alt="Modern Farmer" className="w-full h-auto object-cover" style={{ maxHeight: 500 }} />
             <div className="absolute bottom-6 left-6 glass-card p-4 flex items-center gap-4 bg-white/90 backdrop-blur-md">
               <div className="p-3 bg-green-100 text-green-700 rounded-xl"><TrendingUp size={20} /></div>
               <div>
@@ -88,27 +88,27 @@ const LandingPage = ({ setRoute }) => {
       </section>
 
       {/* Features Section */}
-      <section className="bg-slate-50 py-24 border-t border-slate-200">
+      <section className="bg-slate-900/50 py-24 border-t border-slate-800">
         <div className="max-w-7xl mx-auto px-8">
           <div className="text-center mb-16">
-            <h3 className="text-4xl font-black text-slate-800 mb-4" style={{ fontFamily: 'Syne, sans-serif' }}>Everything you need to succeed</h3>
-            <p className="text-slate-600 font-medium max-w-2xl mx-auto">From sowing to selling, our platform provides professional-grade tools designed specifically for the modern agricultural ecosystem.</p>
+            <h3 className="text-4xl font-black text-slate-100 mb-4" style={{ fontFamily: 'Syne, sans-serif' }}>Everything you need to succeed</h3>
+            <p className="text-slate-400 font-medium max-w-2xl mx-auto">From sowing to selling, our platform provides professional-grade tools designed specifically for the modern agricultural ecosystem.</p>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               {features.map((f, i) => (
-                <div key={i} className="glass-card p-6 hover:shadow-xl transition-shadow bg-white">
-                  <div className="w-12 h-12 rounded-2xl bg-green-50 flex items-center justify-center text-primary mb-5 border border-green-100">
+                <div key={i} className="glass-card p-6 hover:shadow-xl transition-shadow border border-slate-800">
+                  <div className="w-12 h-12 rounded-2xl bg-slate-800 flex items-center justify-center text-primary mb-5 border border-slate-700">
                     <f.icon size={24} />
                   </div>
-                  <h4 className="text-lg font-bold text-slate-800 mb-2">{f.title}</h4>
-                  <p className="text-sm text-slate-600 font-medium leading-relaxed">{f.desc}</p>
+                  <h4 className="text-lg font-bold text-slate-100 mb-2">{f.title}</h4>
+                  <p className="text-sm text-slate-400 font-medium leading-relaxed">{f.desc}</p>
                 </div>
               ))}
             </div>
             <div className="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white h-full min-h-[400px]">
-               <img src="/drone.png" alt="Drone Farming" className="absolute inset-0 w-full h-full object-cover" />
+               <img src={`${import.meta.env.BASE_URL}drone.png`} alt="Drone Farming" className="absolute inset-0 w-full h-full object-cover" />
             </div>
           </div>
         </div>

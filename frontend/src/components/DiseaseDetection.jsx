@@ -61,7 +61,7 @@ const DiseaseDetection = () => {
 
     // Simulate step-by-step AI progress
     for (let i = 0; i < SCAN_STEPS.length; i++) {
-      await new Promise(r => setTimeout(r, 700));
+      await new Promise(r => setTimeout(r, 400));
       setScanStep(i + 1);
     }
 

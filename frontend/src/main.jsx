@@ -18,16 +18,31 @@ const updateSW = registerSW({
 
 const RootRouter = () => {
   const [route, setRoute] = useState('landing');
-  const [userName, setUserName] = useState('Guest Farmer');
-  const [userLocation, setUserLocation] = useState('New Delhi, India');
+  const [userName, setUserName] = useState(localStorage.getItem('userName') || 'Guest Farmer');
+  const [userLocation, setUserLocation] = useState(localStorage.getItem('userLocation') || 'New Delhi, India');
+  const [theme, setTheme] = useState(localStorage.getItem('theme') || 'dark');
+  const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('isLoggedIn') === 'true');
+
+  React.useEffect(() => {
+    if (route === 'app' && !isLoggedIn) {
+      setRoute('login');
+    }
+  }, [route, isLoggedIn]);
+
+  React.useEffect(() => {
+    document.documentElement.className = theme;
+    localStorage.setItem('theme', theme);
+  }, [theme]);
+
+  const toggleTheme = () => setTheme(prev => prev === 'dark' ? 'light' : 'dark');
 
   return (
-    <>
+    <div className={`min-h-screen ${theme}`}>
       {route === 'landing' && <LandingPage setRoute={setRoute} />}
-      {route === 'login' && <LoginPage setRoute={setRoute} setUserName={setUserName} setUserLocation={setUserLocation} />}
+      {route === 'login' && <LoginPage setRoute={setRoute} setUserName={setUserName} setUserLocation={setUserLocation} setIsLoggedIn={setIsLoggedIn} />}
       {route === 'reviews' && <ReviewsPage setRoute={setRoute} />}
-      {route === 'app' && <App setRoute={setRoute} userName={userName} userLocation={userLocation} />}
-    </>
+      {route === 'app' && isLoggedIn && <App setRoute={setRoute} userName={userName} userLocation={userLocation} theme={theme} toggleTheme={toggleTheme} />}
+    </div>
   );
 };
 
